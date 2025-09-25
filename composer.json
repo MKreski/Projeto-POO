@@ -1,0 +1,9 @@
+{
+    "name": "unimar/poogames",
+    "autoload": {
+        "psr-4": {
+            "Unimar\\Poogames\\": "src/"
+        }
+    },
+    "require": {}
+}
