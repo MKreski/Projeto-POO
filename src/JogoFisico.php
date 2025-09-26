@@ -20,11 +20,11 @@ class JogoFisico extends Jogo {
         $this->custoDanos = $custoDanos;
     }
 
-    public function Jogar() {
+    public function Jogar() { // só mostra na tela que está jogando o jogo físico
         echo "Jogando o jogo físico: {$this->nome} na plataforma {$this->plataforma} no console {$this->console->getModelo()}";
     }
 
-    public function Alugar(cliente $cliente, int $dias) {
+    public function Alugar(cliente $cliente, int $dias) { // Aluga o jogo físico para o cliente por um número de dias
         if ($this->disponivel && $cliente->podeAlugar) {
             $this->disponivel = false;
             $this->cliente = $cliente;

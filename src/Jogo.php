@@ -12,6 +12,6 @@ abstract class Jogo Extends Produto {
     public string $plataforma;
     public string $genero;
 
-    abstract function Jogar();
+    abstract function Jogar(); // função abstrata pq tanto o jogo físico como o digital vão implementar de formas diferentes
 
 }

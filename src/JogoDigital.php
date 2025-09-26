@@ -23,11 +23,11 @@ class JogoDigital extends Jogo {
         return $chave;
     }
 
-    public function Jogar() {
+    public function Jogar() { // só mostra na tela que está jogando o jogo digital
         echo "Jogando o jogo digital: {$this->nome} na plataforma {$this->plataforma} com a chave temporária: {$this->chaveTemp}";
     }
 
-    public function Alugar(cliente $cliente, int $dias) {
+    public function Alugar(cliente $cliente, int $dias) { // Aluga o jogo digital para o cliente por um número de dias
         if ($this->disponivel && $cliente->podeAlugar) {
             $this->disponivel = false;
             $this->cliente = $cliente;

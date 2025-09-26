@@ -48,6 +48,10 @@ $precoConsole = (float)readline("Insira o preço para alugar do console: ");
 $console = new Console($modelonsole, $fabricanteConsole, $anoConsole, $precoConsole);
 echo $console->getDados() . "\n";
 
+echo "\nAlugando o console...\n";
+$diasAluguelConsole = (int)readline("Insira o tempo de aluguel em dias: ");
+$console->Alugar($clienteNovo, $diasAluguelConsole);
+
 echo "\nAdicionando Jogo Físico...\n";
 $nomeJogoFisico = readline("Insira o nome do jogo físico: ");
 $plataformaJogoFisico = readline("Insira a plataforma do jogo físico: ");
@@ -61,6 +65,7 @@ echo $jogoFisico->getDados() . "\n";
 echo "\nAlugando o jogo físico...\n";
 $diasAluguelFisico = (int)readline("Insira o tempo de aluguel em dias: ");
 $jogoFisico->Alugar($clienteNovo, $diasAluguelFisico);
+$console->adicionarJogo($jogoFisico);
 
 echo "\n Jogar os jogos...\n";
 $jogoDigital->Jogar();
