@@ -6,16 +6,11 @@ use Unimar\Poogames\Jogo;
 use Unimar\Poogames\Console;
 
 class JogoFisico extends Jogo {
-    protected Console $console; // console onde o jogo físico será jogado   
-    protected float $custoDanos; // custo para reparo em caso de danos ao jogo físico
+    private Console $console; // console onde o jogo físico será jogado   
+    private float $custoDanos; // custo para reparo em caso de danos ao jogo físico
 
     public function __construct(string $Nome, string $Plataforma, string $Genero, int $ano, float $preco, bool $disponivel, Console $console, float $custoDanos) {
-        $this->nome = $Nome;
-        $this->plataforma = $Plataforma;
-        $this->ano = $ano;
-        $this->preco = $preco;
-        $this->disponivel = $disponivel;
-        $this->genero = $Genero;
+        parent::__construct($Nome, $Plataforma, $Genero, $ano, $preco, $disponivel);
         $this->console = $console;
         $this->custoDanos = $custoDanos;
     }

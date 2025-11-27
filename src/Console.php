@@ -4,19 +4,17 @@ namespace unimar\poogames;
 
 use Unimar\Poogames\Produto;
 
-class Console
+class Console extends Produto
 {
-    public string $modelo;
-    protected string $fabricante;
-    public array $jogos = [];
+    private string $modelo;
+    private string $fabricante;
+    private array $jogos = [];
 
     public function __construct(string $modelo, string $fabricante, int $ano, float $preco, bool $disponivel = true)
     {
-        $this->modelo = $modelo;     
-        $this->fabricante = $fabricante;     
-        $this->ano = $ano;
-        $this->preco = $preco;
-        $this->disponivel = $disponivel;
+        parent::__construct($ano, $preco, $disponivel);
+        $this->setModelo($modelo);    
+        $this->setFabricante($fabricante);   
     }
 
     public function getModelo() :  string
@@ -24,15 +22,25 @@ class Console
         return $this->modelo;
     }
 
+    private function setModelo(string $modelo) : void
+    {
+        $this->modelo = $modelo;
+    }
+
     public function getFabricante() : string
     {
         return $this->fabricante;
     }
 
-    // public function getJogos() : string
-    // {
-    //     return $this->Jogos;
-    // }
+    private function setFabricante(string $fabricante) : void
+    {
+        $this->fabricante = $fabricante;
+    }
+
+    public function getJogos() : array
+    {
+        return $this->Jogos;
+    }
 
     public function getDados() : string
     {
@@ -54,6 +62,15 @@ class Console
     public function adicionarJogo(JogoFisico $jogo) // Adiciona um jogo físico ao array do console
     {
         array_push($this->jogos, $jogo);
+    }
+
+    public function removerJogo(JogoFisico $jogo) // Remove um jogo físico do array do console
+    {
+        $index = array_search($jogo, $this->jogos);
+        if ($index !== false) {
+            unset($this->jogos[$index]);
+            $this->jogos = array_values($this->jogos); // Reindexa o array após a remoção
+        }
     }
 
     public function listarJogos(): string // Lista os jogos associados ao console

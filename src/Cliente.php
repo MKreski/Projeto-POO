@@ -4,15 +4,15 @@ namespace unimar\poogames;
 
 class Cliente
 {
-    protected string $nome;
-    protected string $email;
-    public bool $podeAlugar;
+    private string $nome;
+    private string $email;
+    private bool $podeAlugar;
     
     public function __construct(string $nome, string $email, bool $podeAlugar = true)
     {
-        $this->nome = $nome;
-        $this->email = $email;
-        $this->podeAlugar = $podeAlugar;
+        $this->setNome($nome);
+        $this->setEmail($email);
+        $this->setPodeAlugar($podeAlugar);
     }
 
     //  SERIA A MESMA COISA DO getDados, só que separado não?
@@ -22,15 +22,30 @@ class Cliente
         return $this->nome;
     }
 
-    // public function getEmail() : string
-    // {
-    //     return $this->email;
-    // }
+    private function setNome(string $nome) : void
+    {
+        $this->nome = $nome;
+    }
 
-    // public function podeAlugar() : bool
-    // {
-    //     return $this->podeAlugar;
-    // }
+    public function getEmail() : string
+    {
+        return $this->email;
+    }
+
+    private function setEmail(string $email) : void
+    {
+        $this->email = $email;
+    }
+
+    public function getPodeAlugar() : bool
+    {
+        return $this->podeAlugar;
+    }
+
+    private function setPodeAlugar(bool $podeAlugar) : void
+    {
+        $this->podeAlugar = $podeAlugar;
+    }
 
     public function getDados() : string 
     {
