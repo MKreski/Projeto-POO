@@ -11,7 +11,7 @@ abstract class Jogo Extends Produto {
     private string $nome;
     private string $genero;
 
-    protected function __construct(string $Nome, string $Plataforma, string $Genero, int $ano, float $preco, bool $disponivel = true) {
+    protected function __construct(string $Nome, string $Genero, int $ano, float $preco, bool $disponivel = true) {
         parent::__construct($ano, $preco, $disponivel);
         $this->setNome($Nome);
         $this->setGenero($Genero);

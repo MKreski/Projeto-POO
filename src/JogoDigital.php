@@ -7,7 +7,6 @@ use Unimar\Poogames\Cliente;
 
 class JogoDigital extends Jogo {
     private string $chaveTemp = ""; // chave de acesso temporária
-    private int $copias; // número de cópias que seram alugadas na mesma chave
     private string $plataforma; // plataforma onde o jogo digital será jogado
 
     public function __construct(string $Nome, string $Plataforma, string $Genero, int $ano, float $preco, bool $disponivel = true) {
@@ -28,7 +27,7 @@ class JogoDigital extends Jogo {
         return $this->chaveTemp;
     }
 
-    public function setPlataforma(string $plataforma): void {
+    private function setPlataforma(string $plataforma): void {
         $this->plataforma = $plataforma;
     }
 
@@ -37,21 +36,21 @@ class JogoDigital extends Jogo {
     }
 
     public function Jogar() { // só mostra na tela que está jogando o jogo digital
-        echo "Jogando o jogo digital: {$this->nome} na plataforma {$this->plataforma} com a chave temporária: {$this->chaveTemp}";
+        echo "Jogando o jogo digital: {$this->getNome()} na plataforma {$this->plataforma} com a chave temporária: {$this->chaveTemp}";
     }
 
-    public function Alugar(cliente $cliente, int $dias) { // Aluga o jogo digital para o cliente por um número de dias
+    public function Alugar(cliente $cliente, int $dias): void { // Aluga o jogo digital para o cliente por um número de dias
         if ($this->getDisponivel() && $cliente->getPodeAlugar()) {
             $this->setDisponivel(false);
             $this->setChave();
-            $precoTotal = $this->preco * $dias;
-            echo "Jogo digital {$this->nome} alugado por {$dias} dias para o cliente {$cliente->getNome()}. Chave temporária: {$this->chaveTemp} Preço total: R$ {$precoTotal}";
+            $precoTotal = $this->getPreco() * $dias;
+            echo "Jogo digital {$this->getNome()} alugado por {$dias} dias para o cliente {$cliente->getNome()}. Chave temporária: {$this->getChaveTemp()} Preço total: R$ {$precoTotal}";
         } else {
-            echo "Jogo digital {$this->nome} não está disponível para aluguel ou o Cliente nao pode alugar.";
+            echo "Jogo digital {$this->getNome()} não está disponível para aluguel ou o Cliente nao pode alugar.";
         }
     }
 
     public function getDados(): string {
-        return "Nome: {$this->nome}, Plataforma: {$this->plataforma}, Gênero: {$this->genero}, Ano: {$this->ano}, Preço: R$ {$this->preco}, Disponível: " . ($this->disponivel ? 'Sim' : 'Não') . ", Chave Temporária: {$this->chaveTemp}";
+        return "Nome: {$this->getNome()}, Plataforma: {$this->getPlataforma()}, Gênero: {$this->getGenero()}, Ano: {$this->getAno()}, Preço: R$ {$this->getPreco()}, Disponível: " . ($this->getDisponivel() ? 'Sim' : 'Não') . ", Chave Temporária: {$this->getChaveTemp()}";
     }   
 }   

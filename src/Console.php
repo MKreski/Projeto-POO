@@ -44,18 +44,17 @@ class Console extends Produto
 
     public function getDados() : string
     {
-        return "Modelo: {$this->modelo}, Fabricante: {$this->fabricante}, Ano: {$this->ano}, Preço: R$ {$this->preco}, Disponível: " . ($this->disponivel ? 'Sim' : 'Não');
+        return "Modelo: {$this->getModelo()}, Fabricante: {$this->getFabricante()}, Ano: {$this->getAno()}, Preço: R$ {$this->getPreco()}, Disponível: " . ($this->getDisponivel() ? 'Sim' : 'Não');
     }
 
     public function Alugar(Cliente $cliente, int $dias) // nessa parte só vai pegar o cliente pq da tanto pra alugar jogo como console, (até por isso q é uma função abstrata né)
     {
-        if ($this->disponivel && $cliente->podeAlugar) {
-            $this->disponivel = false;
-            $this->cliente = $cliente;
-            $precoTotal = $this->preco * $dias;
-            echo "Console {$this->modelo} alugado por {$dias} dias para o cliente {$cliente->getNome()}. Preço total: R$ {$precoTotal}";
+        if ($this->getDisponivel() && $cliente->getPodeAlugar()) {
+            $this->setDisponivel(false);
+            $precoTotal = $this->getPreco() * $dias;
+            echo "Console {$this->getModelo()} alugado por {$dias} dias para o cliente {$cliente->getNome()}. Preço total: R$ {$precoTotal}";
         } else {
-            echo "Console {$this->modelo} não está disponível para aluguel.";
+            echo "Console {$this->getModelo()} não está disponível para aluguel.";
         }
     }
 
@@ -75,12 +74,12 @@ class Console extends Produto
 
     public function listarJogos(): string // Lista os jogos associados ao console
     {
-        if (empty($this->jogos)) {
+        if (empty($this->getJogos())) {
             return "Nenhum jogo associado a este console.";
         }
 
         $listaJogos = "Jogos associados ao console {$this->modelo}:\n";
-        foreach ($this->jogos as $jogo) {
+        foreach ($this->getJogos() as $jogo) {
             $listaJogos .= "- " . $jogo->getDados() . "\n";
         }
         return $listaJogos;

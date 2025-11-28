@@ -2,6 +2,8 @@
 
 namespace unimar\poogames;
 
+use Unimar\Poogames\Produto;
+
 abstract class Midia extends Produto {
     private string $titulo;
     private string $diretor;

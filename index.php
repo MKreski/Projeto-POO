@@ -6,8 +6,8 @@ use Unimar\Poogames\Cliente;
 use Unimar\Poogames\Console;
 use Unimar\Poogames\JogoFisico;
 use Unimar\Poogames\JogoDigital;
-
-// $consoleTeste = new Console("Xbox", "Microsoft", 2020, 150);
+use Unimar\Poogames\Serie;
+use Unimar\Poogames\Filme;
 
 echo "Insira o nome do cliente: ";
 $nome = readline();
@@ -15,11 +15,6 @@ echo "Insira o email do cliente: ";
 $email = readline();
 $clienteNovo = new Cliente($nome, $email);
 echo $clienteNovo->getDados();
-
-// echo "\n\n--- Testando Jogo Físico ---\n";
-// $ps5 = new Console("PlayStation 5", "Sony", 2020);
-// $jogoFisico = new JogoFisico("The Last of Us Part II", "PS Store", "Ação/Aventura", 2020, 29.99, true, $ps5, 15.00);
-// echo $jogoFisico->getDados() . "\n";
 
 echo "\n\n--- Adicionando Jogo Digital ---\n";
 echo "Insira o nome do jogo digital: ";
@@ -54,12 +49,11 @@ $console->Alugar($clienteNovo, $diasAluguelConsole);
 
 echo "\nAdicionando Jogo Físico...\n";
 $nomeJogoFisico = readline("Insira o nome do jogo físico: ");
-$plataformaJogoFisico = readline("Insira a plataforma do jogo físico: ");
 $generoJogoFisico = readline("Insira o gênero do jogo físico: ");
 $anoJogoFisico = (int)readline("Insira o ano do jogo físico: ");
 $precoJogoFisico = (float)readline("Insira o preço do jogo físico: ");
 $custoDanos = (float)readline("Insira o custo de danos do jogo físico: ");
-$jogoFisico = new JogoFisico($nomeJogoFisico, $plataformaJogoFisico, $generoJogoFisico, $anoJogoFisico, $precoJogoFisico, true, $console, $custoDanos);
+$jogoFisico = new JogoFisico($nomeJogoFisico, $generoJogoFisico, $anoJogoFisico, $precoJogoFisico, true, $console, $custoDanos);
 echo $jogoFisico->getDados() . "\n";
 
 echo "\nAlugando o jogo físico...\n";
@@ -72,3 +66,59 @@ $jogoDigital->Jogar();
 echo "\n";
 $jogoFisico->Jogar();
 echo "\n";
+
+echo "\n--- Testando Série ---\n";
+echo "Insira o título da série: ";
+$tituloSerie = readline();
+echo "Insira o diretor da série: ";
+$diretorSerie = readline();
+echo "Insira o gênero da série: ";
+$generoSerie = readline();
+echo "Insira o número de temporadas da série: ";
+$temporadasSerie = (int)readline();
+echo "Insira o número de episódios por temporada: ";
+$episodiosSerie = (int)readline();
+echo "Insira o ano da série: ";
+$anoSerie = (int)readline();
+echo "Insira o preço da série: ";
+$precoSerie = (float)readline();
+$serie = new Serie($tituloSerie, $diretorSerie, $generoSerie, $temporadasSerie, $episodiosSerie, $anoSerie, $precoSerie);
+echo $serie->getDados() . "\n";
+
+echo "\nAlugando a série...\n";
+$diasAluguelSerie = (int)readline("Insira o tempo de aluguel em dias: ");
+$serie->Alugar($clienteNovo, $diasAluguelSerie);
+
+echo "\n--- Testando Filme ---\n";
+echo "Insira o título do filme: "; 
+$tituloFilme = readline();
+echo "Insira o diretor do filme: ";
+$diretorFilme = readline();
+echo "Insira o gênero do filme: ";
+$generoFilme = readline();
+echo "Insira a duração do filme em minutos: ";
+$duracaoFilme = (int)readline();
+echo "Insira o ano do filme: ";
+$anoFilme = (int)readline();
+echo "Insira o preço do filme: ";
+$precoFilme = (float)readline();
+$filme = new Filme($tituloFilme, $diretorFilme, $generoFilme, $duracaoFilme, $anoFilme, $precoFilme);
+echo $filme->getDados() . "\n";
+
+echo "\nAlugando o filme...\n";
+$diasAluguelFilme = (int)readline("Insira o tempo de aluguel em dias: ");
+$filme->Alugar($clienteNovo, $diasAluguelFilme);
+
+echo "\nAssistindo ao filme e à série...\n";
+$filme->Assistir();
+echo "\n";
+$serie->Assistir();
+echo "\n";
+
+echo "\nFim dos testes.\n";
+$console = null;
+$jogoDigital = null;
+$jogoFisico = null;
+$serie = null;
+$filme = null;
+$clienteNovo = null;

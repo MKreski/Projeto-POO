@@ -2,6 +2,8 @@
 
 namespace unimar\poogames;
 
+use Unimar\Poogames\Midia;
+
 class Serie extends Midia {
     private int $temporadas; // Exclusivo de Série
     private int $episodiosPorTemp;
@@ -18,7 +20,12 @@ class Serie extends Midia {
     }
 
     private function setTemporadas(int $temporadas): void {
-        $this->temporadas = $temporadas;
+        if ($temporadas <= 0) {
+            echo "Número de temporadas inválido.";
+        }
+        else {
+            $this->temporadas = $temporadas;
+        }
     }
 
     public function getTemporadas(): int {
@@ -26,25 +33,34 @@ class Serie extends Midia {
     }
 
     private function setEpisodiosPorTemp(int $episodios): void {
-        $this->episodiosPorTemp = $episodios;
+        if ($episodios <= 0) {
+            echo "Número de episódios inválido.";
+        }
+        else {
+            $this->episodiosPorTemp = $episodios;
+        }
     }
 
     public function getEpisodiosPorTemp(): int {
         return $this->episodiosPorTemp;
     }
 
+    private function atualizarTemporadas(int $novasTemporadas): void {
+        $this->setTemporadas($novasTemporadas);
+    }
+
     public function getDados() {
-        return "Série: {$this->titulo}, Temporadas: {$this->temporadas}, Preço: R$ {$this->getPreco()}";
+        return "Série: {$this->getTitulo()}, Temporadas: {$this->getTemporadas()}, Preço: R$ {$this->getPreco()}";
     }
 
     public function Alugar(Cliente $cliente, int $dias) {
         if ($this->getDisponivel() && $cliente->getPodeAlugar()) {
             $this->setDisponivel(false);
             $total = $this->getPreco() * $dias;
-            echo "Box da Série '{$this->titulo}' alugado. Boa maratona!";
+            echo "Box da Série '{$this->getTitulo()}' alugado por R${$total}. Boa maratona!";
         }
         else {
-            echo "Série '{$this->titulo}' não está disponível para aluguel ou o cliente não pode alugar.";
+            echo "Série '{$this->getTitulo()}' não está disponível para aluguel ou o cliente não pode alugar.";
         }
     }
 }

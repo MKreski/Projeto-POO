@@ -2,6 +2,8 @@
 
 namespace unimar\poogames;
 
+use Unimar\Poogames\Midia;
+
 class Filme extends Midia {
     private int $duracaoMinutos; // Exclusivo de Filme
 
@@ -15,26 +17,30 @@ class Filme extends Midia {
     }
 
     private function setDuracaoMinutos(int $duracao): void {
-        $this->duracaoMinutos = $duracao;
+        if ($duracao <= 0) {
+            echo "Duração inválida.";
+        }
+        else {
+            $this->duracaoMinutos = $duracao;
+        }
     }
 
     public function getDuracaoMinutos(): int {
         return $this->duracaoMinutos;
     }
 
-    // Implementação obrigatória do Produto
     public function getDados() {
-        return "Filme: {$this->titulo}, Diretor: {$this->diretor}, Duração: {$this->duracaoMinutos}min, Preço: R$ {$this->getPreco()}";
+        return "Filme: {$this->getTitulo()}, Diretor: {$this->getDiretor()}, Duração: {$this->getDuracaoMinutos()}min, Preço: R$ {$this->getPreco()}";
     }
 
     public function Alugar(Cliente $cliente, int $dias) {
         if ($this->getDisponivel() && $cliente->getPodeAlugar()) {
             $this->setDisponivel(false);
             $total = $this->getPreco() * $dias;
-            echo "Filme '{$this->titulo}' alugado por {$dias} dias. Total: R$ {$total}";
+            echo "Filme '{$this->getTitulo()}' alugado por {$dias} dias. Total: R$ {$total}";
         }
         else {
-            echo "Filme '{$this->titulo}' não está disponível para aluguel ou o cliente não pode alugar.";
+            echo "Filme '{$this->getTitulo()}' não está disponível para aluguel ou o cliente não pode alugar.";
         }
     }
 }

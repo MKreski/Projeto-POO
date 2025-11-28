@@ -13,12 +13,21 @@ abstract class Produto {
         $this->setDisponivel($disponivel);
     }
 
+    protected function __destruct() {
+        echo "O Produto foi removido do estoque.";
+    }
+
     public function getAno() : int {
         return $this->ano;
     }
 
     private function setAno(int $ano) : void {
-        $this->ano = $ano;
+        if ($ano <= 0) {
+            echo "Ano inválido";
+        }
+        else {
+            $this->ano = $ano;
+        }
     }
 
     public function getPreco() : float {
@@ -26,7 +35,12 @@ abstract class Produto {
     }
 
     private function setPreco(float $preco) : void {
-        $this->preco = $preco;
+        if ($preco <= 0) {
+            echo "Preço inválido";
+        }
+        else {
+            $this->preco = $preco;
+        }
     }
 
     public function getDisponivel(): bool {
@@ -35,6 +49,10 @@ abstract class Produto {
 
     protected function setDisponivel(bool $disponivel): void {
         $this->disponivel = $disponivel;
+    }
+
+    public function atualizarPreco(float $novoPreco): void {
+        $this->setPreco($novoPreco);
     }
 
     abstract public function getDados();

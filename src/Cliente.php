@@ -49,6 +49,6 @@ class Cliente
 
     public function getDados() : string 
     {
-        return "Nome: {$this->nome}, Email: {$this->email}, Pode Alugar: {$this->podeAlugar}" . ($this->podeAlugar ? 'Sim' : 'Não');
+        return "Nome: {$this->getNome()}, Email: {$this->getEmail()}, Pode Alugar: {$this->getPodeAlugar()}" . ($this->getPodeAlugar() ? 'Sim' : 'Não');
     }
 }
